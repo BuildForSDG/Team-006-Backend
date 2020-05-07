@@ -1,2 +1,8 @@
+import app from './app';
 
-console.log('a');
+// Setup the app port
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  // eslint-disable-next-line no-console
+  console.log('Node Server Started', `Listening at Port: ${port}`);
+});
