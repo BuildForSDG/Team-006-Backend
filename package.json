@@ -13,19 +13,19 @@
     "test": "__tests__"
   },
   "scripts": {
+    "build": "webpack --config webpack.prod.js",
+    "dev": "npm-run-all --parallel watch:server watch:build",
+    "lint": "eslint \"src/**/*.js\"",
+    "start": "node build/main.js",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:cover": "jest --coverage",
-    "build": "webpack --config webpack.prod.js",
-    "dev": "npm-run-all --parallel watch:server watch:build",
     "watch:build": "webpack --watch",
-    "watch:server": "nodemon --inspect=\"9229\" \"./build/main.js\" --watch \"./build\" ",
-    "lint": "eslint \"src/**/*.js\"",
-    "start": "node build/main.js"
+    "watch:server": "nodemon --inspect=\"9229\" \"./build/main.js\" --watch \"./build\" "
   },
   "author": {
-    "name": "Build For SDG",
-    "email": "buildforsdg@andela.com"
+    "email": "buildforsdg@andela.com",
+    "name": "Build For SDG"
   },
   "homepage": "https://github.com/BuildForSDG/js-starter#readme",
   "repository": {
