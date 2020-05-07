@@ -6,3 +6,5 @@ app.listen(port, () => {
   // eslint-disable-next-line no-console
   console.log('Node Server Started', `Listening at Port: ${port}`);
 });
+
+export default app;
