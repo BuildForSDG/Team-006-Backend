@@ -13,7 +13,7 @@
     "test": "__tests__"
   },
   "scripts": {
-    "build": "webpack --config webpack.prod.js",
+    "build": "cross-env NODE_ENV=production webpack --config webpack.prod.js",
     "dev": "npm-run-all --parallel watch:server watch:build",
     "lint": "eslint \"src/**/*.js\"",
     "start": "node build/main.js",
@@ -47,6 +47,7 @@
     "@babel/preset-env": "^7.9.5",
     "babel-jest": "^25.4.0",
     "babel-loader": "^8.1.0",
+    "cross-env": "^7.0.2",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-plugin-import": "^2.20.2",

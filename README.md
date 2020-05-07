@@ -47,7 +47,7 @@ This starter uses [Parcel](https://parceljs.org/getting_started.html) as the bun
 
 ##### Running the App on Development Environment
 
-- After installing the modules, run `npm run dev` to run the app on dev mode.  
+-  After installing the modules, run `npm run dev` to run the app on dev mode.  
 
 ## Authors
 

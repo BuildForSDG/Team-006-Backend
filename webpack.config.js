@@ -24,7 +24,7 @@ module.exports = {
   node: {
     __dirname: false
   },
-  mode: 'development',
+  mode: process.env.NODE_ENV || 'development',
   externals: nodeModules,
   module: {
     rules: [
