@@ -18,6 +18,7 @@
     "test:cover": "jest --coverage",
     "test:ci": "jest --coverage && cat ./coverage/lcov.info | coveralls",
     "lint": "eslint \"src/**/*.js\"",
+    "lint:debug": "eslint --debug \"src/**/*.js\"",
     "lint:fix": "eslint --fix \"src/**/*.js\"",
     "build": "babel src --out-dir dist --delete-dir-on-start",
     "dev": "NODE_ENV=dev nodemon --exec babel-node ./src/index.js",
