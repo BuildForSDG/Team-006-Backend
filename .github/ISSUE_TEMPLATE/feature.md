@@ -16,7 +16,7 @@ so that &lt;some reason&gt;
 
 ### Acceptance Criteria
 
-- [ ] 1. **Scenario**: Describe Scenario
+- **Scenario**: Describe Scenario
   -   Given &lt;context&gt;
       - And &lt;some more context&gt;...
 
