@@ -2,7 +2,7 @@
 
 name: Feature
 about: A new feature for this project
-title: "\[feature\] - Feature title"
+title: "[feature] - Feature title"
 labels: feature, front-end
 assignees: ''
 
