@@ -17,7 +17,7 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:cover": "jest --coverage",
-    "test:ci": "jest --coverage && cat ./__tests__/coverage/lcov.info | coveralls",
+    "test:ci": "jest --coverage && cat ./coverage/lcov.info | coveralls",
     "lint": "eslint \"src/**/*.js\"",
     "remark-lint": "remark '*.md' '.github\\ISSUE_TEMPLATE\\*.md'",
     "lint:debug": "eslint --debug \"src/**/*.js\"",
