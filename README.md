@@ -1,10 +1,6 @@
 barebones setup for JavaScript / Node projects replace this with a one-liner phrase describing this project or app
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/39b66e6021a84aee98e6749fd1ec77e3)](https://app.codacy.com/gh/BuildForSDG/Team-006-Backend?utm_source=github.com&utm_medium=referral&utm_content=BuildForSDG/Team-006-Backend&utm_campaign=Badge_Grade_Dashboard)
-
-[![Build Status](https://travis-ci.com/BuildForSDG/Team-006-Backend.svg?branch=develop)](https://travis-ci.com/BuildForSDG/Team-006-Backend)
-
-[![Coverage Status](https://coveralls.io/repos/github/BuildForSDG/Team-006-Backend/badge.svg?branch=develop)](https://coveralls.io/github/BuildForSDG/Team-006-Backend?branch=develop)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/39b66e6021a84aee98e6749fd1ec77e3)](https://app.codacy.com/gh/BuildForSDG/Team-006-Backend?utm_source=github.com&utm_medium=referral&utm_content=BuildForSDG/Team-006-Backend&utm_campaign=Badge_Grade_Dashboard) [![Build Status](https://travis-ci.com/BuildForSDG/Team-006-Backend.svg?branch=develop)](https://travis-ci.com/BuildForSDG/Team-006-Backend) [![Coverage Status](https://coveralls.io/repos/github/BuildForSDG/Team-006-Backend/badge.svg?branch=develop)](https://coveralls.io/github/BuildForSDG/Team-006-Backend?branch=develop)
 
 ## About
 

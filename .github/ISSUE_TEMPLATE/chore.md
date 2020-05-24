@@ -2,7 +2,7 @@
 name: Chore
 about: Operational tasks and requirements
 title: "[chore] - Chore description"
-labels: chore, front-end
+labels: chore, back-end
 assignees: ''
 
 ---
