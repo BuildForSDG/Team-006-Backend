@@ -1,13 +1,7 @@
-import app from '../src/index';
+import app from '../src/api';
 
 describe('app module', () => {
-  test('it exists', async () => {
+  test('it exists', () => {
     expect(app).toBeDefined();
-  });
-
-  test('it returns program name with SDGs', async () => {
-    const result = await app();
-    const sdgPos = (result || '').indexOf('SDG');
-    expect(sdgPos).toBeGreaterThanOrEqual(0);
   });
 });

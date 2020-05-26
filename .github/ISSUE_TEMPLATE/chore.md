@@ -1,8 +1,8 @@
 ---
 name: Chore
 about: Operational tasks and requirements
-title: "\[chore\] - Chore description"
-labels: chore, front-end
+title: "[chore] - Chore description"
+labels: chore, back-end
 assignees: ''
 
 ---

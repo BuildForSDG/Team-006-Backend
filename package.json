@@ -1,10 +1,11 @@
 {
-  "name": "js-starter",
+  "name": "rapidmed",
   "version": "0.0.1",
   "description": "A boilerplate for starting js code",
   "keywords": [
-    "js-starter",
-    "boilerplate"
+    "rapidmed",
+    "buildforsdg",
+    "sdg"
   ],
   "private": false,
   "main": "dist/index.js",
@@ -29,13 +30,13 @@
     "name": "Build For SDG",
     "email": "buildforsdg@andela.com"
   },
-  "homepage": "https://github.com/BuildForSDG/js-starter#readme",
+  "homepage": "https://github.com/BuildForSDG/team-006-backend#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/BuildForSDG/js-starter.git"
+    "url": "https://github.com/BuildForSDG/team-006-backend.git"
   },
   "bugs": {
-    "url": "https://github.com/BuildForSDG/js-starter/issues"
+    "url": "https://github.com/BuildForSDG/team-006-backend/issues"
   },
   "license": "MIT",
   "dependencies": {
@@ -57,7 +58,7 @@
     "remark-cli": "^8.0.0",
     "remark-preset-lint-consistent": "^3.0.0",
     "remark-preset-lint-markdown-style-guide": "^3.0.0",
-    "remark-preset-lint-recommended": "^4.0.0"
+    "remark-preset-lint-recommended": "^4.0.0",
     "nodemon": "^2.0.3"
   },
   "browserslist": [

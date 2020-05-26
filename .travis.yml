@@ -1,0 +1,14 @@
+language: node_js
+node_js:
+- '12'
+before_script:
+- npm run lint
+script:
+- npm run test:ci
+deploy:
+  provider: heroku
+  api_key:
+    secure: CInBXTPrWsHsxks0c3OJW9SJ1/RGcDk69uV42MzKhCly1m3e/ZpBbynhHEjPnjfHVdwpxFtefzDEhi4mO+COidymRgnu1gpbaF8oXUYglAgeWlP0NFWXLQjWRaLYjw7LtlNgt3BKEbG09SLWqVqvXg8AM8SWDJW+OhegX0QDlhY9C0ZlU8jjaGE2bkVqPBIeEIp+4t/iGGMSQhAasIiwmE+0tjKbkYSzBtd46VAfCU+VGcYwXjQYWNIY8F7HS+3fjtQ6luUHVsRGbmcosGikX/HGDCtDBc910smbdCdSzedmc+cfvAkn+eGh2kgWwmV20KRilBqWMpXnkQ9J/R8l8yuvuooKNXDsY+sbE6pPz9feGOrhd6SWk5bJ7FH7Oy3C+hIWz7zokkm7yT1LW3TE9DqSPagN25JhecLzSLHJU+JZqiRwJo6e/epVeI4VmnITLT/xlV3/Uc39EOinaJKyE5taWCSo9hMS7SKdsN5bmV/r9Putc/SLg+TtEJ3udF+RMx0eKuIgQj+PhWdsYwLOjmBaeIZcDtxmCvDyqvqz9bBgNqdUsaDpfOtTy64Mr7fspl7ZuXpV8WcVOgKC5LueStl4P+aFIMOwIHCu4NsaJjzQOW3GcZNbM30kzlXTnqS18rTEHXIbtQUV9xEVnSORjN3HbCW1aH58oBR1xteKYj8=
+  app: rapidmed-buildforsdg
+  on:
+    branch: develop
