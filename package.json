@@ -23,7 +23,7 @@
     "lint:debug": "eslint --debug \"src/**/*.js\"",
     "lint:fix": "eslint --fix \"src/**/*.js\"",
     "build": "babel src --out-dir dist --delete-dir-on-start",
-    "dev": "NODE_ENV=dev nodemon --exec babel-node ./src/index.js",
+    "dev": "DEBUG=log NODE_ENV=development nodemon --exec babel-node ./src/index.js",
     "start": "NODE_ENV=production node ./dist/index.js"
   },
   "author": {
