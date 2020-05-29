@@ -1,9 +1,13 @@
 import app from './api';
+import createDB from './api/db/create-db';
 
 require('custom-env').env();
+
 const config = require('config');
 const http = require('http');
 const debug = require('debug')('log');
+
+createDB(config.get('dbConfig'));
 
 const server = http.createServer(app);
 const normalizePort = (val) => {
@@ -50,3 +54,5 @@ server.on('listening', () => {
 });
 
 server.listen(port);
+
+process.on('SIGINT', () => { debug('Bye bye!'); process.exit(); }); // -- for nodemon headache
