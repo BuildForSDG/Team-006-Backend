@@ -5,7 +5,7 @@ const fs = require('fs').promises;
 const path = require('path');
 
 // if DB exists
-const createDB = (dbConfig) => {
+const createDB = async (dbConfig) => {
   const pool = new Pool({
     user: dbConfig.user,
     host: dbConfig.host,
@@ -15,84 +15,99 @@ const createDB = (dbConfig) => {
   });
 
   const migrateFn = async () => {
-    let migrationClient;
-    try {
-      debug('Running migration ...');
-      const sql = await fs.readFile(path.join(__dirname, './sql/db-create.sql'), 'utf8');
-      debug('read sql file');
+    debug('Running migration ...');
+    const sql = await fs.readFile(path.join(__dirname, './sql/db-create.sql'), 'utf8');
+    debug('SQL migration file read successfully');
 
-      // reconnect client first
-      migrationClient = await pool.connect();
+    // reconnect client first
+    const migrationClient = await pool.connect();
 
-      await migrationClient.query(sql);
-      await migrationClient.query(`
+    await migrationClient.query(sql);
+    await migrationClient.query(`
         INSERT INTO DB_VERSION (ID, VERSION)
         VALUES (1, 1.0)
         ON CONFLICT (ID) DO UPDATE SET VERSION = EXCLUDED.VERSION
       `);
 
-      debug('Migration run succesfully');
-      migrationClient.release();
-    } catch (err) {
-      debug(err.message);
-      debug('An error occured executing SQL file');
-    }
+    // do some seeding here maybe create an initial super-admin, admin and responder
+
+    debug('Migration run succesfully');
+    migrationClient.release();
+
+    return true;
   };
 
   debug('Checking for database ...');
-  (async () => {
-    let client;
+
+
+  try {
+    const client = await pool.connect();
+    debug('Database found!');
+
+    // check if migration has been run
     try {
-      client = await pool.connect();
-      debug('Database found!');
+      debug('Checking for initial migration ....');
 
-      try {
-        debug('Checking for initial migration ....');
+      const result = await client.query('select exists(select version from db_version where version >= 1) as migrated');
 
-        const result = await client.query('select exists(select version from db_version where version >= 1) as migrated');
-        if (result.rows[0].migrated) {
-          debug('Database has been migrated');
-          return 'migrated';
-        }
-      } catch (error) {
-        if (error.message.includes('relation "db_version" does not exist')) {
-          debug('Migration has not run yet. Attempting to run ...');
-          migrateFn();
-        }
+      // Table exists check if it has any rows
+      if (result.rows[0].migrated) {
+        debug('Database has been migrated');
+        return 'migrated';
       }
-
-      client.release();
+      // migration table is empty
+      throw new Error('Migration table is empty');
     } catch (error) {
-      debug(error.message);
-
-      if (error.message.includes(`database "${dbConfig.database}" does not exist`)) {
-        debug('Database not found!');
-        debug('Attempting to create DB ...');
-
+      if (error.message.includes('relation "db_version" does not exist')) {
+        debug('Migration has not run yet. Attempting to run ...');
         try {
-          await pgtools.createdb(
-            {
-              user: dbConfig.user,
-              host: dbConfig.host,
-              password: dbConfig.password,
-              port: dbConfig.port
-            },
-            dbConfig.database
-          );
-
-          debug(`Database - ${dbConfig.database} created successfully`);
-
-          // run migration
-          migrateFn();
+          await migrateFn();
         } catch (err) {
           debug(err.message);
-          process.exit(-1);
+          debug('An error occured executing SQL file');
+
+          throw err; // rethrow error to catch out there
         }
+      } else {
+        // rethrow error
+        throw error;
       }
     }
 
-    return 'not migrated';
-  })(pool);
+    client.release();
+
+    return true;
+  } catch (error) {
+    debug(error.message);
+
+    if (error.message.includes(`database "${dbConfig.database}" does not exist`)) {
+      debug('Database not found!');
+      debug('Attempting to create DB ...');
+
+      try {
+        await pgtools.createdb(
+          {
+            user: dbConfig.user,
+            host: dbConfig.host,
+            password: dbConfig.password,
+            port: dbConfig.port
+          },
+          dbConfig.database
+        );
+
+        debug(`Database - ${dbConfig.database} created successfully`);
+
+        // run migration
+        await migrateFn();
+      } catch (err) {
+        debug(err.message);
+        process.exit(-1);
+      }
+    }
+  }
+
+  return 'not migrated';
 };
+
 
 export default createDB;
