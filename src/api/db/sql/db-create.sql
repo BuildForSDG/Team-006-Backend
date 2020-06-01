@@ -882,8 +882,18 @@ CREATE TABLE public.RESPONSE_UNITS (
     CREATED_BY bigint NOT NULL
 );
 
-
 ALTER TABLE public.RESPONSE_UNITS OWNER TO postgres;
+
+CREATE TABLE public.refresh_tokens
+(
+  fb_id character varying NOT NULL,
+  token_hash character varying NOT NULL,
+  device_id character varying,
+  date_created timestamp with time zone NOT NULL DEFAULT now(),
+  CONSTRAINT refresh_tokens_pkey PRIMARY KEY (fb_id, token_hash)
+);
+
+ALTER TABLE public.refresh_tokens OWNER TO postgres;
 
 --
 -- TOC entry 2387 (class 0 OID 0)
