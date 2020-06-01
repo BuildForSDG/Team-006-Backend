@@ -58,7 +58,8 @@ const startServer = () => {
 };
 
 createDB(config.get('dbConfig'))
-  .then(() => {
+  .then((res) => {
+    debug(res);
     startServer();
   })
   .catch((error) => {

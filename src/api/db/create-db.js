@@ -34,11 +34,12 @@ const createDB = async (dbConfig) => {
     debug('Migration run succesfully');
     migrationClient.release();
 
-    return true;
+    await pool.end();
+
+    return 'migratedDB';
   };
 
   debug('Checking for database ...');
-
 
   try {
     const client = await pool.connect();
@@ -52,16 +53,24 @@ const createDB = async (dbConfig) => {
 
       // Table exists check if it has any rows
       if (result.rows[0].migrated) {
-        debug('Database has been migrated');
-        return 'migrated';
+        debug('Database has already been migrated');
+        client.release();
+        await pool.end();
+
+        return 'dbAlreadyMigrated';
       }
       // migration table is empty
-      throw new Error('Migration table is empty');
+      throw new Error('Error: DB exists but migration table is empty');
     } catch (error) {
+      // release old connection
+      client.release();
+
       if (error.message.includes('relation "db_version" does not exist')) {
         debug('Migration has not run yet. Attempting to run ...');
         try {
           await migrateFn();
+
+          return 'dbMigrated';
         } catch (err) {
           debug(err.message);
           debug('An error occured executing SQL file');
@@ -73,10 +82,6 @@ const createDB = async (dbConfig) => {
         throw error;
       }
     }
-
-    client.release();
-
-    return true;
   } catch (error) {
     debug(error.message);
 
@@ -99,14 +104,16 @@ const createDB = async (dbConfig) => {
 
         // run migration
         await migrateFn();
+
+        return 'dbCreatedAndMigrated';
       } catch (err) {
         debug(err.message);
-        process.exit(-1);
+        throw err; // db creation failure
       }
     }
+    pool.end(); // release connection to DB
+    throw error; // throw the error for the external handler
   }
-
-  return 'not migrated';
 };
 
 
