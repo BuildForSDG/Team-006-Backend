@@ -2,6 +2,7 @@
 
 # This is a bash script for automatically creating sequelize models of tables
 # Requires one command line argument for table name(s) and .env file
+# On command-line run: "./create_model.sh <tablename>" to create model for a given table
 
 if [ -f .env ]; then
   export $(echo $(cat .env | sed 's/#.*//g'| xargs) | envsubst)
